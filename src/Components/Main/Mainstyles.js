@@ -1,16 +1,4 @@
 import styled from 'styled-components'
-import { createGlobalStyle } from 'styled-components';
-
-export const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  list-style:none;
-  background-color:#5b88a5;
-  color:#191013;
-}`
 
 export const Catalog = styled.div`
 display:flex;

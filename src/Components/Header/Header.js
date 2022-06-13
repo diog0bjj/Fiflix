@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Adds  from '../../Pages/Adds'
 import Main from "../Main/Main"
@@ -9,7 +8,6 @@ import * as S from './HeaderStyles'
 export default function Header(){
 
 const [modal, setModal]=useState(false)
-const [image, setImg]=useState()
 const [inputTitle, setInputTitle]=useState()
 const [inputDescription, setInputDescription]=useState()
 const [inputImage, setInputImage]=useState()
@@ -42,12 +40,12 @@ const Addbox = () =>{
                         <h2 onChange={(event)=>{setInputDescription(event.target.value)}} >rating</h2>
                     </div>
                     <S.AddPosterPart>
-                        <S.PosterChoosed src={image}/>
-                        <input onChange={(event)=>{setImg(event.target.files)}} type="file" accept="image/*"></input>
+                        <S.PosterChoosed src={inputImage}/>
+                        <input onChange={(event)=>{setInputImage(event.target.files)}} type="file" accept="image/*"></input>
                     </S.AddPosterPart>
                 </S.InfosToAddAnime>
                 <S.SendInfos>
-                    <S.SubmitBtn onClick={()=>{AddALLMovies()}} type='submit'>Confirm</S.SubmitBtn>
+                    <S.SubmitBtn onSubmit={()=>{AddALLMovies()}} type='submit'>Confirm</S.SubmitBtn>
                 </S.SendInfos>
             </form>
         </S.ModalAdd>
@@ -75,14 +73,15 @@ setAddedMovie(...addedMovie, EachAddedMovie)
         ))}
       </ul>
             <S.SearchAndAdd>
+                <button><Link to="../../Pages/Adds">todos</Link></button>
                 <S.AddMovie onClick={()=>{OpenModal()}}>Adicionar anime</S.AddMovie>
                 <S.SearchBar placeholder='Search here...'></S.SearchBar>
             </S.SearchAndAdd>
             {modal && Addbox()}
         </S.Navegation>
         <Routes>
-          <Route path="/Main" element={<Main/>} />
-          <Route path="../Pages/Adds" element={<Adds/>} />
+          <Route path="/" element={<Main/>} />
+          <Route path="../../Pages/Adds" element={<Adds/>} />
         </Routes>
     </Router>
         </>

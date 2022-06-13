@@ -1,13 +1,25 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import * as S from './Mainstyles'
-import { GlobalStyle } from './Mainstyles'
 
 export default function Main() {
 
-  const [movie, setMovie]=useState([])
-  const [filtered, setFiltered]=useState([])
-  const [moviePage, setMoviePage]=useState(false)
+const [movie, setMovie]=useState([])
+const [filtered, setFiltered]=useState([])
+const [moviePage, setMoviePage]=useState(false)
+
+// const [fullCatalog, setFullCatalog]=useState([])
+
+// useEffect(()=>{
+//   const myCatalog={
+//     value: movie.map((item)=>(item.image)),
+//     id:Math.random(),
+//   }
+//   setFullCatalog([...fullCatalog, myCatalog])
+//   console.log(myCatalog)
+// },[])
+
+axios.get(`https://ghibliapi.herokuapp.com/films`).then((response)=>{setMovie(response.data)})
 
 function searchingMovie(event){
   setFiltered(movie.filter((item)=>{
@@ -25,16 +37,14 @@ function CloseModal(){
   setMoviePage(!moviePage)
 }
 
-axios.get(`https://ghibliapi.herokuapp.com/films`).then((response)=>{setMovie(response.data)})
-
   return (
     <>
-    <GlobalStyle/>
+
     <input onChange={(event)=>{searchingMovie(event)}} />
     <h3>Nosso catalogo de animes</h3>
     <S.Catalog>
       {filtered.map(item=>(
-         <S.Poster onClick={()=>{OpenModal()}} src={item.image} alt='poster do filme'/>
+         <S.Poster src={item.image} alt='poster do filme'/>
      ))}
     </S.Catalog>
     <S.Catalog>
